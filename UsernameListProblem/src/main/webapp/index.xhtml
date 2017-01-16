@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Username List Problem</title>
+	<style>
+		.panelNoBorder, .panelNoBorder tr, .panelNoBorder td {
+			border: hidden;
+			border-color: white;
+		}
+</style>
+</h:head>
+
+<h:body>
+
+	<h3 style="text-align:center;margin-top: 15">Username List Problem App </h3>
+
+	<p:layout style="min-width:20%;min-height:90%;">
+		<p:layoutUnit position="west" resizable="true">
+			<h3 style="margin-top: 15;margin-left: 15">Menu</h3>
+			<h:form>
+				<p:growl id="messages" showDetail="false" />
+				<p:menu>
+					<p:submenu label="Username">
+						<p:menuitem value="Username" actionListener="#{registerUsername.showUsernamePanel}" update="messages, :main" />
+					</p:submenu>
+					<p:submenu label="Dictionary">
+						<p:menuitem value="Word" actionListener="#{registerUsername.showWordPanel}" update="messages, :main" />
+					</p:submenu>
+				</p:menu>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+
+			<p:panel id="main" styleClass="panelNoBorder">
+				<h:form id="mainForm">
+					<p:panel id="wordPanel" rendered="#{registerUsername.wordPanel}" styleClass="panelNoBorder">
+						<p:tabView onTabShow="$('#tvlistr').click();" dynamic="true"
+							cache="false" style="border: 0px;">
+							<p:ajax event="tabChange" listener="#{registerWord.onTabChange}" immediate="true" />
+
+							<p:tab id="wordTab" title="Register Word" rendered="true">
+								<p:growl id="messagesWord"></p:growl>
+								<h:panelGrid columns="2" cellpadding="10">
+									<p:panelGrid columns="2" styleClass="panelNoBorder">
+										<p:outputLabel value="Enter Word:"></p:outputLabel>
+										<p:inputText value="#{registerWord.word.wordName}" required="true" requiredMessage="Please, word can't be blank/null">
+											<f:validator validatorId="com.intertecintl.validator.WordValidador" />
+										</p:inputText>
+									</p:panelGrid>
+									<p:commandButton value="Register" action="#{registerWord.register}" update="messagesWord" />
+								</h:panelGrid>
+							</p:tab>
+
+							<p:tab id="wordListTab" title="Word List" rendered="true">
+
+								<h:panelGrid columns="2" cellpadding="10">
+									<p:dataTable var="word" value="#{registerWord.words}" scrollable="true" scrollHeight="150">
+										<p:column headerText="Word Id">
+											<h:outputText value="#{word.wordId}" />
+										</p:column>
+										<p:column headerText="Word Name">
+											<h:outputText value="#{word.wordName}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+
+							</p:tab>
+
+						</p:tabView>
+					</p:panel>
+
+					<p:panel id="usernamePanel" rendered="#{registerUsername.usernamePanel}" styleClass="panelNoBorder">
+
+						<p:tabView onTabShow="$('#tvlistr').click();" dynamic="true" cache="false" style="border: 0px;">
+							<p:ajax event="tabChange" listener="#{registerUsername.onTabChange}" immediate="true" />
+
+							<p:tab id="wordTab" title="Register Username" rendered="true">
+								<p:growl id="messagesUsername"></p:growl>
+								<h:panelGrid columns="2" cellpadding="10">
+									<p:panelGrid columns="2">
+										<p:outputLabel value="Enter Username:"></p:outputLabel>
+										<p:inputText value="#{registerUsername.username.usernameName}" required="true" requiredMessage="Please, username can't be blank/null">
+											<f:validator validatorId="com.intertecintl.validator.UsernameValidador" />
+										</p:inputText>
+									</p:panelGrid>
+									<p:commandButton value="Register" action="#{registerUsername.register}" update="messagesUsername, :main" />
+								</h:panelGrid>
+							</p:tab>
+
+							<p:tab id="usernameListTab" title="Username List" rendered="true">
+								<h:panelGrid columns="2" cellpadding="10">
+									<p:dataTable var="username" value="#{registerUsername.usernames}" scrollable="true" scrollHeight="150">
+										<p:column headerText="Username Id">
+											<h:outputText value="#{username.usernameId}" />
+										</p:column>
+										<p:column headerText="Username Name">
+											<h:outputText value="#{username.usernameName}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+							</p:tab>
+						</p:tabView>
+
+					</p:panel>
+
+					<p:panel rendered="#{registerUsername.showSuggestedPanel}" styleClass="panelNoBorder">
+						<p:dataList value="#{registerUsername.suggestedList}" var="sWord" type="ordered">
+							<f:facet name="header">
+					            Suggested List
+					        </f:facet>
+					        	#{sWord}
+					    </p:dataList>
+					</p:panel>
+
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+	
+	<class name="com.intertecintl.hibernate.data.Username" table="username">
+		<id name="usernameId" column="USER_ID" type="long">
+			<generator class="native" />
+		</id>
+		<property name="usernameName" column="USER_NAME" type="string"/>
+	</class>
+	
+	<class name="com.intertecintl.hibernate.data.Word" table="word">
+		<id name="wordId" column="WORD_ID" type="long">
+			<generator class="native" />
+		</id>
+		<property name="wordName" column="WORD_NAME" type="string"/>
+	</class>
+	
+</hibernate-mapping>
