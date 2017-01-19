@@ -10,20 +10,39 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.intertecintl.hibernate.data.Word;
 
+/**
+ * The Class WordService.
+ */
 @Component
 public class WordService {
 	
+	/** The session factory. */
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	/**
+	 * Gets the session factory.
+	 *
+	 * @return the session factory
+	 */
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
+	/**
+	 * Sets the session factory.
+	 *
+	 * @param sessionFactory the new session factory
+	 */
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	
+	/**
+	 * Register.
+	 *
+	 * @param word the word
+	 */
 	@Transactional
 	public void register(Word word){
 		// Acquire session
@@ -32,6 +51,11 @@ public class WordService {
 		session.save(word);		
 	}
 	
+	/**
+	 * Load word.
+	 *
+	 * @return the list
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Word> loadWord(){

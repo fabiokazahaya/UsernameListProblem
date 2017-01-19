@@ -17,45 +17,83 @@ import com.intertecintl.hibernate.data.Word;
 import com.intertecintl.spring.service.WordService;
 import com.intertecintl.utils.MessageUtils;
 
+/**
+ * The Class RegisterWord.
+ */
 @ManagedBean
 @SessionScoped
 public class RegisterWord {
 	
 	
+	/** The Constant LOG. */
 	static final Logger LOG = LoggerFactory.getLogger(RegisterWord.class);
 
+	/** The word service. */
 	@ManagedProperty("#{wordService}")
 	private WordService wordService;
 
+	/** The word. */
 	private Word word = new Word();
 	
+	/** The words. */
 	private List<Word> words;
 	
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
     public void init() {
         words = wordService.loadWord();
     }
 	
+	/**
+	 * Gets the words.
+	 *
+	 * @return the words
+	 */
 	public List<Word> getWords(){
 		return words;
 	}
 
+	/**
+	 * Gets the word service.
+	 *
+	 * @return the word service
+	 */
 	public WordService getWordService() {
 		return wordService;
 	}
 
+	/**
+	 * Sets the word service.
+	 *
+	 * @param wordService the new word service
+	 */
 	public void setWordService(WordService wordService) {
 		this.wordService = wordService;
 	}
 
+	/**
+	 * Gets the word.
+	 *
+	 * @return the word
+	 */
 	public Word getWord() {
 		return word;
 	}
 
+	/**
+	 * Sets the word.
+	 *
+	 * @param word the new word
+	 */
 	public void setWord(Word word) {
 		this.word = word;
 	}
 
+	/**
+	 * Register.
+	 */
 	public void register() {
 		
 		LOG.info("Registering Word");
@@ -80,6 +118,11 @@ public class RegisterWord {
 		}
 	}
 	
+	/**
+	 * On tab change.
+	 *
+	 * @param event the event
+	 */
 	public void onTabChange(TabChangeEvent event) {
 		words = wordService.loadWord();
     }

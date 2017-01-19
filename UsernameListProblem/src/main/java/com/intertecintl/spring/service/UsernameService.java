@@ -10,20 +10,39 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.intertecintl.hibernate.data.Username;
 
+/**
+ * The Class UsernameService.
+ */
 @Component
 public class UsernameService {
 	
+	/** The session factory. */
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	/**
+	 * Gets the session factory.
+	 *
+	 * @return the session factory
+	 */
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
+	/**
+	 * Sets the session factory.
+	 *
+	 * @param sessionFactory the new session factory
+	 */
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	
+	/**
+	 * Register.
+	 *
+	 * @param username the username
+	 */
 	@Transactional
 	public void register(Username username){
 		// Acquire session
@@ -32,6 +51,11 @@ public class UsernameService {
 		session.save(username);		
 	}
 	
+	/**
+	 * Load username.
+	 *
+	 * @return the list
+	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Username> loadUsername(){

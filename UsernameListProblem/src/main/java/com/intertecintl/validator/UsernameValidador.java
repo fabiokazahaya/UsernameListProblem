@@ -15,24 +15,43 @@ import org.slf4j.LoggerFactory;
 
 import com.intertecintl.utils.StringUtils;
 
+/**
+ * The Class UsernameValidador.
+ */
 @FacesValidator("com.intertecintl.validator.UsernameValidador")
 public class UsernameValidador implements Validator {
 
+	/** The Constant LOG. */
 	static final Logger LOG = LoggerFactory.getLogger(UsernameValidador.class);
 	
+	/** The letter number msg. */
 	private static String LETTER_NUMBER_MSG = "Username validation failed. Please use only letters (a-z) and numbers.";
+	
+	/** The null blank msg. */
 	private static String NULL_BLANK_MSG = "Username validation failed. Please Username can't be null or blank.";
+	
+	/** The size msg. */
 	private static String SIZE_MSG = "Username validation failed. Please Username must have size between 6 and 45 use letters/numbers.";
 	
+	/** The Constant USERNAME_PATTERN. */
 	private static final String USERNAME_PATTERN = "^[a-zA-Z0-9_]*$";
 	
+	/** The pattern. */
 	private Pattern pattern;
+	
+	/** The matcher. */
 	private Matcher matcher;
 	
+	/**
+	 * Instantiates a new username validador.
+	 */
 	public UsernameValidador(){
 		  pattern = Pattern.compile(USERNAME_PATTERN);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.faces.validator.Validator#validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)
+	 */
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		
