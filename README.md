@@ -1,3 +1,3 @@
 # UsernameListProblem
 Technologies:
-Spring, JPA, Maven, EJB3, Primefaces, MySQL.
+Spring, JPA, Maven, Primefaces, MySQL.
